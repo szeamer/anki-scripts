@@ -1,0 +1,5 @@
+__pycache__/
+venv/
+generated_audio/
+bangla_audio/
+*.mp3
