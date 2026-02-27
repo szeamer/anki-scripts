@@ -24,7 +24,7 @@ os.makedirs(AUDIO_FOLDER, exist_ok=True)
 
 
 def add_audio():
-    note_ids = anki.get_model_note_ids(DECK_NAME, "BanglaCloze")
+    note_ids = anki.get_model_note_ids(DECK_NAME, "CustomCloze")
     for note_id in note_ids:
         note_audio = anki.get_note_field_value(note_id, AUDIO_FIELD)
         if note_audio != "":
@@ -41,7 +41,7 @@ def add_automatic_transliteration():
     DECK_NAME = "Intro to  Bangla"
     SOURCE_FIELD = "Sentence"
     TARGET_FIELD = "Romanization"
-    note_ids = anki.get_model_note_ids(DECK_NAME, "BanglaCloze")
+    note_ids = anki.get_model_note_ids(DECK_NAME, "CustomCloze")
     for note_id in note_ids:
         romanization = anki.get_note_field_value(note_id, ROMANIZATION_FIELD)
         if romanization != "":
@@ -54,7 +54,7 @@ def add_automatic_transliteration():
             anki.add_value_to_note_field(note_id, transliterated_sentence, ROMANIZATION_FIELD)
 
 def create_translation_cards():
-    note_ids = anki.get_model_note_ids(DECK_NAME, "BanglaCloze")
+    note_ids = anki.get_model_note_ids(DECK_NAME, "CustomCloze")
     for note_id in note_ids:
         add_translation_card = anki.get_note_field_value(note_id, ADD_TRANSLATION_CARD_FIELD)
         translation_note_id = anki.get_note_field_value(note_id, TRANSLATION_NOTE_ID_FIELD)
