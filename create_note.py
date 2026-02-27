@@ -26,7 +26,7 @@ def create_translation_note(
         "fields": {
             "Sentence": fields_dict["sentence"],
             "Translation": fields_dict["translation"],
-            "Romanization": fields_dict["romanization"],
+            "Romanization": fields_dict.get("romanization", ""),
             "Audio": fields_dict["audio"],
             "NoteID": str(fields_dict["source_note_id"])
         },
