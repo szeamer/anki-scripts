@@ -3,6 +3,7 @@ import json
 import re
 import html
 import audio
+import os
 
 
 ANKI_CONNECT_URL = "http://localhost:8765"  # Change if different   
@@ -69,7 +70,8 @@ def get_note_tags(note_id):
 
 def add_audio_to_note_field(note_id, filepath, field_name):
     value = audio.audio_base64(filepath)
-    audio_tag = f"[sound:{filepath}]"
+    filename = os.path.basename(filepath)
+    audio_tag = f"[sound:{filename}]"   
     add_value_to_note_field(note_id, audio_tag, field_name)
 
 def add_value_to_note_field(note_id, value, field_name):
