@@ -22,9 +22,9 @@ def add_audio():
     note_ids = anki.get_model_note_ids(DECK_NAME, "CustomCloze")
     for note_id in note_ids:
         note_audio = anki.get_note_field_value(note_id, AUDIO_FIELD)
-        if note_audio != "":
-            print(f"Audio already exists for note {note_id}")
-            continue
+        #if note_audio != "":
+        #    print(f"Audio already exists for note {note_id}")
+        #    continue
         sentence = anki.get_note_field_value(note_id, SENTENCE_FIELD)
         path = audio.build_file_path(note_id, AUDIO_FOLDER)
         audio.generate_audio(sentence, LANGUAGE_CODE, path)
