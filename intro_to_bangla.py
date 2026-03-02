@@ -1,4 +1,4 @@
-import avro
+from aksharamukha import transliterate
 import os
 
 
@@ -50,8 +50,10 @@ def add_automatic_transliteration():
             continue
         else:
             sentence = anki.get_note_field_value(note_id, SENTENCE_FIELD)
-            transliterated_sentence = avro.reverse(sentence)
+            transliterated_sentence = transliterate.process('autodetect', 'latn-iast',sentence, param="script_code")
             anki.add_value_to_note_field(note_id, transliterated_sentence, ROMANIZATION_FIELD)
+            print(f"Added romanization to note {note_id}")
+            print(transliterated_sentence)
 
 def create_translation_cards():
     note_ids = anki.get_model_note_ids(DECK_NAME, "CustomCloze")
