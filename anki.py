@@ -19,7 +19,7 @@ def anki_request(action, **params):
     Returns:
         dict: The response from the AnkiConnect API.
     """
-    return requests.post(
+    out = requests.post(
         ANKI_CONNECT_URL,
         json={
             "action": action,
@@ -27,6 +27,9 @@ def anki_request(action, **params):
             "params": params
         }
     ).json()
+    if out.get("error") is not None:
+        raise RuntimeError(f"AnkiConnect {action}: {out['error']}")
+    return out
 
 def get_note_ids(deck_name):
     """
@@ -114,6 +117,6 @@ def store_audio_file(filepath):
     value = audio.audio_base64(filepath)
     anki_request(
         "storeMediaFile",
-        filename=filepath,
+        filename=os.path.basename(filepath),
         data=value
     )
