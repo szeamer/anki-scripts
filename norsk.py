@@ -19,13 +19,18 @@ AUDIO_FOLDER = "norsk_audio"
 os.makedirs(AUDIO_FOLDER, exist_ok=True)
 
 def add_audio():
-    note_ids = anki.get_model_note_ids(DECK_NAME, "CustomCloze")
+    note_ids = anki.get_note_ids(DECK_NAME)
     for note_id in note_ids:
-        note_audio = anki.get_note_field_value(note_id, AUDIO_FIELD)
-        #if note_audio != "":
-        #    print(f"Audio already exists for note {note_id}")
-        #    continue
-        sentence = anki.get_note_field_value(note_id, SENTENCE_FIELD)
+        try:
+            note_audio = anki.get_note_field_value(note_id, AUDIO_FIELD)
+        except KeyError:
+            continue  # note type has no Audio field
+        if note_audio.strip():
+            continue  # already has audio
+        try:
+            sentence = anki.get_note_field_value(note_id, SENTENCE_FIELD)
+        except KeyError:
+            continue  # note type has no Sentence field
         path = audio.build_file_path(note_id, AUDIO_FOLDER)
         audio.generate_audio(sentence, LANGUAGE_CODE, path)
         anki.store_audio_file(path)
