@@ -41,10 +41,10 @@ def add_automatic_transliteration():
     DECK_NAME = "Intro to  Bangla"
     SOURCE_FIELD = "Sentence"
     TARGET_FIELD = "Romanization"
-    note_ids = anki.get_model_note_ids(DECK_NAME, "CustomCloze")
+    note_ids = anki.get_note_ids(DECK_NAME)
     for note_id in note_ids:
         romanization = anki.get_note_field_value(note_id, ROMANIZATION_FIELD)
-        if romanization != "":
+        if romanization != "" and romanization != None:
             print(f"Romanization already exists for note {note_id}")
             print(romanization)
             continue
